@@ -7,6 +7,6 @@
   @returns
   <Big Endian Number>
 */
-module.exports = ({words}) => {
-  return words.reverse().reduce((sum, n, i) => sum + n * Math.pow(32, i), 0);
+export default ({words}) => {
+  return words.reverse().reduce((sum, n, i) => sum + n * 32 ** i, 0);
 };

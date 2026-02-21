@@ -1,4 +1,4 @@
-const boundary = Math.pow(2, 5);
+const boundary = 2 ** 5;
 const {floor} = Math;
 
 /** Number as bech32 words
@@ -12,7 +12,7 @@ const {floor} = Math;
     [words]: [<Bech32 Word Number>]
   }
 */
-module.exports = ({number}) => {
+export default ({number}) => {
   if (number === undefined) {
     return {};
   }
@@ -25,7 +25,7 @@ module.exports = ({number}) => {
 
   const words = [];
 
-  while (!!cursor) {
+  while (cursor) {
     words.unshift(cursor & (boundary - [cursor].length));
 
     cursor = floor(cursor / boundary);

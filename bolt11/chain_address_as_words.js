@@ -1,5 +1,5 @@
-const chainAddressDetails = require('./chain_address_details');
-const hexAsWords = require('./hex_as_words');
+import chainAddressDetails from './chain_address_details.js';
+import hexAsWords from './hex_as_words.js';
 
 /** Convert chain address to bech32 words
 
@@ -13,7 +13,7 @@ const hexAsWords = require('./hex_as_words');
     words: [<Chain Address Word Number>]
   }
 */
-module.exports = ({address, network}) => {
+export default ({address, network}) => {
   if (!address) {
     throw new Error('ExpectedAddressToGetWordsForChainAddress');
   }

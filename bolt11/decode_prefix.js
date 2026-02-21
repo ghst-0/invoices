@@ -1,4 +1,4 @@
-const bech32CurrencyCodes = require('./conf/bech32_currency_codes');
+import bech32CurrencyCodes from './conf/bech32_currency_codes.json' with { type: 'json' };
 
 const simplePrefixPattern = /^ln(\S+)$/;
 const standardPrefixPattern = /^ln(\S+?)(\d*)([a-zA-Z]?)$/;
@@ -19,16 +19,16 @@ const standardPrefixPattern = /^ln(\S+?)(\d*)([a-zA-Z]?)$/;
     units: <Amount Units String>
   }
 */
-module.exports = ({prefix}) => {
+export default ({prefix}) => {
   const matches = prefix.match(standardPrefixPattern);
 
-  if (!matches || !matches.length) {
+  if (!matches || matches.length === 0) {
     throw new Error('InvalidPaymentRequestPrefix');
   }
 
   const [,, type] = matches;
 
-  const prefixElements = !type ?  prefix.match(simplePrefixPattern) : matches;
+  const prefixElements = type ? matches : prefix.match(simplePrefixPattern);
 
   const [, currency, amount, units] = prefixElements;
 

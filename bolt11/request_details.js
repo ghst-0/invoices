@@ -1,4 +1,4 @@
-const {safeTokens} = require('./../bolt00');
+import { safeTokens } from './../bolt00/index.js';
 
 const asDateString = ms => new Date(ms).toISOString();
 const defaultCltvDelta = 18;
@@ -66,47 +66,47 @@ const msPerSec = 1e3;
     [tokens]: <Requested Chain Tokens Number> (note: can differ from mtokens)
   }
 */
-module.exports = ({destination, details, mtokens, network, timestamp}) => {
+export default ({destination, details, mtokens, network, timestamp}) => {
   const amounts = safeTokens({mtokens: mtokens || defaultMtokens});
 
   return details.reduce((sum, n) => {
-    if (!!n.chain_address) {
+    if (n.chain_address) {
       sum.chain_addresses.push(n.chain_address);
     }
 
-    if (!!n.cltv_delta) {
+    if (n.cltv_delta) {
       sum.cltv_delta = n.cltv_delta;
     }
 
-    if (!!n.description) {
+    if (n.description) {
       sum.description = n.description;
     }
 
-    if (!!n.description_hash) {
+    if (n.description_hash) {
       sum.description_hash = n.description_hash;
     }
 
-    if (!!n.expiry_seconds) {
+    if (n.expiry_seconds) {
       sum.expires_at = asDateString((n.expiry_seconds * msPerSec) + timestamp);
     }
 
-    if (!!n.features) {
+    if (n.features) {
       sum.features = n.features;
     }
 
-    if (!!n.id) {
+    if (n.id) {
       sum.id = n.id;
     }
 
-    if (!!n.metadata) {
+    if (n.metadata) {
       sum.metadata = n.metadata;
     }
 
-    if (!!n.payment) {
+    if (n.payment) {
       sum.payment = n.payment;
     }
 
-    if (!!n.path) {
+    if (n.path) {
       const [first] = n.path;
       const lastHop = {public_key: destination};
 
@@ -128,14 +128,14 @@ module.exports = ({destination, details, mtokens, network, timestamp}) => {
   {
     destination,
     network,
-    chain_addresses: !!details.find(n => !!n.chain_address) ? [] : undefined,
+    chain_addresses: details.some(n => !!n.chain_address) ? [] : undefined,
     cltv_delta: defaultCltvDelta,
     created_at: asDateString(timestamp),
     expires_at: asDateString((defaultExpireSeconds * msPerSec) + timestamp),
     features: [],
     mtokens: mtokens || Number().toString(),
-    routes: !!details.find(n => !!n.path) ? [] : undefined,
-    safe_tokens: !!mtokens ? amounts.safe : Number(),
-    tokens: !!mtokens ? amounts.tokens : Number(),
+    routes: details.some(n => !!n.path) ? [] : undefined,
+    safe_tokens: mtokens ? amounts.safe : Number(),
+    tokens: mtokens ? amounts.tokens : Number(),
   });
 };

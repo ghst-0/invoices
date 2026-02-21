@@ -1,8 +1,7 @@
-const {networks} = require('bitcoinjs-lib');
+import { networks } from 'bitcoinjs-lib';
+import address_version from './conf/address_versions.json' with { type: 'json' };
 
-const {p2pkh} = require('./conf/address_versions');
-const {p2sh} = require('./conf/address_versions');
-
+const { p2pkh, p2sh } = address_version;
 /** Address version
 
   Either a prefix or a network and version is required
@@ -21,8 +20,8 @@ const {p2sh} = require('./conf/address_versions');
     version: <BOLT 11 Chain Address Version Number>
   }
 */
-module.exports = ({network, prefix, version}) => {
-  if (!!prefix) {
+export default ({network, prefix, version}) => {
+  if (prefix) {
     return {version};
   }
 

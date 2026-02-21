@@ -1,9 +1,6 @@
-const {equal} = require('node:assert').strict;
-const strictSame = require('node:assert').strict.deepStrictEqual;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
-
-const {parsePaymentRequest} = require('./../../');
+import { equal, deepStrictEqual } from 'node:assert/strict';
+import test from 'node:test';
+import { parsePaymentRequest } from './../../index.js';
 
 const msPerSec = 1e3;
 
@@ -360,18 +357,18 @@ const tests = [
   },
 ];
 
-tests.forEach(({description, expected, request}) => {
-  return test(description, (t, end) => {
+for (const { description, expected, request } of tests) {
+  test(description, (t, end) => {
     const details = parsePaymentRequest({request});
 
-    strictSame(details.chain_addresses, expected.chain_addresses, 'Parse address');
+    deepStrictEqual(details.chain_addresses, expected.chain_addresses, 'Parse address');
     equal(details.cltv_delta, expected.cltv_delta, 'Parse cltv delta');
     equal(details.created_at, expected.created_at, 'Parse created at date');
     equal(details.description, expected.description, 'Parse description');
     equal(details.description_hash, expected.description_hash, 'Desc hash');
     equal(details.destination, expected.destination, 'Parse dest pubkey');
     equal(details.expires_at, expected.expires_at, 'Parse expiration date');
-    strictSame(details.features, expected.features, 'Parse feature bits');
+    deepStrictEqual(details.features, expected.features, 'Parse feature bits');
     equal(details.id, expected.id, 'Parse payment hash');
     equal(details.is_expired, expected.is_expired, 'Check expiration status');
     equal(details.metadata, expected.metadata, 'Parse metadata blob');
@@ -385,8 +382,9 @@ tests.forEach(({description, expected, request}) => {
       equal(Array.isArray(details.routes), true, 'Routes were parsed');
       equal(details.routes.length, expected.routes.length, 'Parse all routes');
 
-      details.routes.forEach((route, i) => {
-        return route.forEach((hop, j) => {
+      for (const route of details.routes) {
+        const i = details.routes.indexOf(route)
+        route.forEach((hop, j) => {
           const expect = expected.routes[i][j];
 
           equal(hop.base_fee_mtokens, expect.base_fee_mtokens, 'Hop base-fee');
@@ -394,12 +392,10 @@ tests.forEach(({description, expected, request}) => {
           equal(hop.cltv_delta, expect.cltv_delta, 'Parsed hop cltv delta');
           equal(hop.fee_rate, expect.fee_rate, 'Parsed hop fee rate');
           equal(hop.public_key, expect.public_key, 'Parsed hop public key');
-
-          return;
-        });
-      });
+        })
+      }
     }
 
     return end();
   });
-});
+}

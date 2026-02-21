@@ -1,14 +1,8 @@
-const {sign} = require('tiny-secp256k1');
-
-const {equal} = require('node:assert').strict;
-const strictSame = require('node:assert').strict.deepStrictEqual;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
-
-const {createSignedRequest} = require('./../../');
-const {createUnsignedRequest} = require('./../../');
-const {parsePaymentRequest} = require('./../../');
-const wordsAsBuffer = require('./../../bolt11/words_as_buffer');
+import { equal, deepStrictEqual } from 'node:assert/strict';
+import { sign } from 'tiny-secp256k1';
+import test from 'node:test';
+import { createSignedRequest, createUnsignedRequest, parsePaymentRequest } from './../../index.js';
+import wordsAsBuffer from './../../bolt11/words_as_buffer.js';
 
 const bufFromHex = hex => Buffer.from(hex, 'hex');
 
@@ -273,8 +267,8 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, expected, verify}) => {
-  return test(description, (t, end) => {
+for (const { args, description, expected, verify } of tests) {
+  test(description, (t, end) => {
     const {hash, hrp, tags} = createUnsignedRequest(args);
 
     const data = wordsAsBuffer({words: tags}).toString('hex');
@@ -294,33 +288,33 @@ tests.forEach(({args, description, expected, verify}) => {
 
     const parsed = parsePaymentRequest({request});
 
-    strictSame(parsed.chain_addresses, args.chain_addresses, 'Fallbacks');
+    deepStrictEqual(parsed.chain_addresses, args.chain_addresses, 'Fallbacks');
     equal(parsed.cltv_delta, args.cltv_delta || 18, 'Request cltv expected');
     equal(parsed.created_at, args.created_at, 'Request create_at is expected');
     equal(parsed.description, args.description, 'Req description expected');
     equal(parsed.description_hash, args.description_hash, 'Got Desc hash');
     equal(parsed.destination, verify.destination, 'Destination key expected');
 
-    if (!!args.features) {
-      strictSame(parsed.features, args.features, 'Got expected feature bits');
+    if (args.features) {
+      deepStrictEqual(parsed.features, args.features, 'Got expected feature bits');
     }
 
-    if (!!args.mtokens) {
+    if (args.mtokens) {
       equal(parsed.mtokens, args.mtokens, 'Payment request mtokens expected');
     }
 
-    if (!!args.payment) {
+    if (args.payment) {
       equal(parsed.payment, args.payment, 'Payment identifier expected');
     }
 
-    if (!!args.routes) {
-      strictSame(parsed.routes, args.routes, 'Payment request as expected');
+    if (args.routes) {
+      deepStrictEqual(parsed.routes, args.routes, 'Payment request as expected');
     }
 
-    if (!!args.tokens) {
+    if (args.tokens) {
       equal(parsed.tokens, args.tokens, 'Payment request tokens as expected');
     }
 
     return end();
   });
-});
+}

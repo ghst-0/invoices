@@ -6,11 +6,12 @@
   "dependencies": {
     "bech32": "2.0.0",
     "bitcoinjs-lib": "6.1.7",
+    "bn.js": "5.2.3",
     "bolt07": "1.9.4",
     "bolt09": "2.2.0",
-    "bn.js": "5.2.2",
     "tiny-secp256k1": "2.2.4"
   },
+  "type": "module",
   "description": "Methods for working with BOLT 11 payment requests",
   "engines": {
     "node": ">=20"
@@ -30,7 +31,7 @@
     "url": "https://github.com/alexbosworth/invoices.git"
   },
   "scripts": {
-    "test": "npx nyc@17.1 node --experimental-test-coverage --test"
+    "test": "node --experimental-test-coverage --test"
   },
   "version": "5.0.0"
 }

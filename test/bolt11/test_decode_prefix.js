@@ -1,13 +1,13 @@
-const strictSame = require('node:assert').strict.deepStrictEqual;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
-
-const decodePrefix = require('./../../bolt11/decode_prefix');
+import { throws, deepStrictEqual } from 'node:assert/strict';
+import test from 'node:test';
+import decodePrefix from './../../bolt11/decode_prefix.js';
 
 const makeArgs = overrides => {
   const args = {prefix: 'lnbc1p'};
 
-  Object.keys(overrides).forEach(k => args[k] = overrides[k]);
+  for (const k of Object.keys(overrides)) {
+    args[k] = overrides[k]
+  }
 
   return args;
 };
@@ -30,14 +30,14 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
-    if (!!error) {
+for (const { args, description, error, expected } of tests) {
+  test(description, (t, end) => {
+    if (error) {
       throws(() => decodePrefix(args), new Error(error), 'Got err');
     } else {
-      strictSame(decodePrefix(args), expected, 'Got expected details');
+      deepStrictEqual(decodePrefix(args), expected, 'Got expected details');
     }
 
     return end();
   });
-});
+}

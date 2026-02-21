@@ -1,10 +1,9 @@
-const {createHash} = require('crypto');
+import { createHash } from 'node:crypto';
+import { bech32 } from 'bech32';
+import { recover } from 'tiny-secp256k1';
 
-const {bech32} = require('bech32');
-const {recover} = require('tiny-secp256k1');
-
-const hexAsWords = require('./hex_as_words');
-const wordsAsBuffer = require('./words_as_buffer');
+import hexAsWords from './hex_as_words.js';
+import wordsAsBuffer from './words_as_buffer.js';
 
 const {encode} = bech32;
 const {isArray} = Array;
@@ -29,7 +28,7 @@ const recoveryFlags = [0, 1, 2, 3];
     request: <BOLT 11 Encoded Payment Request String>
   }
 */
-module.exports = ({destination, hrp, signature, tags}) => {
+export default ({destination, hrp, signature, tags}) => {
   if (!destination) {
     throw new Error('ExpectedDestinationForSignedPaymentRequest');
   }
@@ -44,7 +43,7 @@ module.exports = ({destination, hrp, signature, tags}) => {
 
   try {
     hexAsWords({hex: signature});
-  } catch (err) {
+  } catch {
     throw new Error('ExpectedValidSignatureHexForSignedPaymentRequest');
   }
 
@@ -68,7 +67,7 @@ module.exports = ({destination, hrp, signature, tags}) => {
       const key = Buffer.from(recover(hash, sig, flag, true));
 
       return key.equals(destinationKey);
-    } catch (err) {
+    } catch {
       return false;
     }
   });

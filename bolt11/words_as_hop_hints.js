@@ -1,7 +1,5 @@
-const {decodeChanId} = require('bolt07');
-const {encodeChanId} = require('bolt07');
-
-const wordsAsBuffer = require('./words_as_buffer');
+import { decodeChanId, encodeChanId } from 'bolt07';
+import wordsAsBuffer from './words_as_buffer.js';
 
 const decodeChanIdBuffer = buf => decodeChanId({id: buf.toString('hex')});
 
@@ -28,7 +26,7 @@ const decodeChanIdBuffer = buf => decodeChanId({id: buf.toString('hex')});
     }]
   }
 */
-module.exports = ({words}) => {
+export default ({words}) => {
   if (!Array.isArray(words)) {
     throw new Error('ExpectedWordsToInterpretAsHopHints');
   }
@@ -53,7 +51,7 @@ module.exports = ({words}) => {
         block_index: idComponents.block_index,
         output_index: idComponents.output_index,
       });
-    } catch (err) {
+    } catch {
       throw new Error('FailedToEncodeChanIdForHopHint');
     }
 

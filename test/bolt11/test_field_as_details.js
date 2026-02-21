@@ -1,8 +1,6 @@
-const strictSame = require('node:assert').strict.deepStrictEqual;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
-
-const fieldAsDetails = require('./../../bolt11/field_as_details');
+import { throws, deepStrictEqual } from 'node:assert/strict';
+import test from 'node:test';
+import fieldAsDetails from './../../bolt11/field_as_details.js';
 
 const tests = [
   {
@@ -51,16 +49,16 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
-    if (!!error) {
+for (const { args, description, error, expected } of tests) {
+  test(description, (t, end) => {
+    if (error) {
       throws(() => fieldAsDetails(args), new Error(error), 'Got error');
     } else {
       const details = fieldAsDetails(args);
 
-      strictSame(details, expected, 'Got expected result');
+      deepStrictEqual(details, expected, 'Got expected result');
     }
 
     return end();
   });
-});
+}

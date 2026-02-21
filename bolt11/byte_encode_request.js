@@ -1,8 +1,8 @@
-const {bech32} = require('bech32');
+import { bech32 } from 'bech32';
 
-const decodePrefix = require('./decode_prefix');
-const hrpAsMtokens = require('./hrp_as_mtokens');
-const wordsAsBuffer = require('./words_as_buffer');
+import decodePrefix from './decode_prefix.js';
+import hrpAsMtokens from './hrp_as_mtokens.js';
+import wordsAsBuffer from './words_as_buffer.js';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const {decode} = bech32;
@@ -26,7 +26,7 @@ const maxRequestLength = Number.MAX_SAFE_INTEGER;
     words: <Word Length Number>
   }
 */
-module.exports = ({request}) => {
+export default ({request}) => {
   if (!request) {
     throw new Error('ExpectedPaymentRequestToByteEncode');
   }

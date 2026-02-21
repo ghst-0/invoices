@@ -1,3 +1,3 @@
-const safeTokens = require('./safe_tokens');
+import safeTokens from './safe_tokens.js';
 
-module.exports = {safeTokens};
+export { safeTokens };

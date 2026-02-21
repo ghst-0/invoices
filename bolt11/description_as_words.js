@@ -1,4 +1,4 @@
-const {bech32} = require('bech32');
+import { bech32 } from 'bech32';
 
 const encoding = 'utf8';
 const {toWords} = bech32;
@@ -14,7 +14,7 @@ const {toWords} = bech32;
     [words]: [<Bech32 Word Number>]
   }
 */
-module.exports = ({description}) => {
+export default ({description}) => {
   if (description === undefined) {
     return {};
   }

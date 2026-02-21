@@ -1,17 +1,15 @@
-const {createHash} = require('crypto');
+import { createHash } from 'node:crypto';
+import { featureFlagsAsWords } from 'bolt09';
 
-const {crypto} = require('bitcoinjs-lib');
-const {featureFlagsAsWords} = require('bolt09');
-
-const chainAddressAsWords = require('./chain_address_as_words');
-const currencyCodes = require('./conf/bech32_currency_codes');
-const descriptionAsWords = require('./description_as_words');
-const hexAsWords = require('./hex_as_words');
-const hopAsHex = require('./hop_as_hex');
-const mtokensAsHrp = require('./mtokens_as_hrp');
-const numberAsWords = require('./number_as_words');
-const taggedFields = require('./conf/tagged_fields');
-const wordsAsBuffer = require('./words_as_buffer');
+import chainAddressAsWords from './chain_address_as_words.js';
+import currencyCodes from './conf/bech32_currency_codes.json' with { type: 'json' };
+import descriptionAsWords from './description_as_words.js';
+import hexAsWords from './hex_as_words.js';
+import hopAsHex from './hop_as_hex.js';
+import mtokensAsHrp from './mtokens_as_hrp.js';
+import numberAsWords from './number_as_words.js';
+import taggedFields from './conf/tagged_fields.json' with { type: 'json' };
+import wordsAsBuffer from './words_as_buffer.js';
 
 const decBase = 10;
 const defaultExpireMs = 1e3 * 60 * 60 * 24;
@@ -20,11 +18,9 @@ const {floor} = Math;
 const {keys} = Object;
 const maxDescriptionLen = 639;
 const msPerSec = 1e3;
-const mtokPerTok = 1e3;
 const {now} = Date;
 const {parse} = Date;
-const {sha256} = crypto;
-const tokensAsMtokens = n => !n ? '0' : (BigInt(n) * BigInt(1e3)).toString();
+const tokensAsMtokens = n => n ? (BigInt(n) * BigInt(1e3)).toString() : '0';
 
 /** Create an unsigned payment request
 
@@ -61,7 +57,7 @@ const tokensAsMtokens = n => !n ? '0' : (BigInt(n) * BigInt(1e3)).toString();
     tags: [<Data Tag Number>]
   }
 */
-module.exports = args => {
+export default args => {
   if (args.description === undefined && !args.description_hash) {
     throw new Error('ExpectedPaymentDescriptionOrDescriptionHashForPayReq');
   }

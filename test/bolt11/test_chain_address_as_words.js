@@ -1,8 +1,6 @@
-const strictSame = require('node:assert').strict.deepStrictEqual;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
-
-const chainAddressAsWords = require('./../../bolt11/chain_address_as_words');
+import { throws, deepStrictEqual } from 'node:assert/strict';
+import test from 'node:test';
+import chainAddressAsWords from './../../bolt11/chain_address_as_words.js';
 
 const makeArgs = overrides => {
   const args = {
@@ -10,7 +8,9 @@ const makeArgs = overrides => {
     network: 'testnet',
   };
 
-  Object.keys(overrides).forEach(k => args[k] = overrides[k]);
+  for (const k of Object.keys(overrides)) {
+    args[k] = overrides[k]
+  }
 
   return args;
 };
@@ -38,14 +38,14 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
-    if (!!error) {
+for (const { args, description, error, expected } of tests) {
+  test(description, (t, end) => {
+    if (error) {
       throws(() => chainAddressAsWords(args), new Error(error), 'Got err');
     } else {
-      strictSame(chainAddressAsWords(args), expected, 'Got expected words');
+      deepStrictEqual(chainAddressAsWords(args), expected, 'Got expected words');
     }
 
     return end();
   });
-});
+}

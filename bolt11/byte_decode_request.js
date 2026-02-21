@@ -1,7 +1,7 @@
-const {bech32} = require('bech32');
+import { bech32 } from 'bech32';
 
-const currencyCodes = require('./conf/bech32_currency_codes');
-const mtokensAsHrp = require('./mtokens_as_hrp');
+import currencyCodes from './conf/bech32_currency_codes.json' with { type: 'json' };
+import mtokensAsHrp from './mtokens_as_hrp.js';
 
 const hexAsBuffer = hex => Buffer.from(hex, 'hex');
 const isHex = n => !!n && !(n.length % 2) && /^[0-9A-F]*$/i.test(n);
@@ -25,7 +25,7 @@ const limit = Number.MAX_SAFE_INTEGER;
     request: <BOLT 11 Encoded Payment Request String>
   }
 */
-module.exports = ({encoded, mtokens, network, words}) => {
+export default ({encoded, mtokens, network, words}) => {
   if (!isHex(encoded)) {
     throw new Error('ExpectedHexEncodedPaymentRequestDataToDecodeRequest');
   }

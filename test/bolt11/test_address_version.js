@@ -1,8 +1,6 @@
-const {equal} = require('node:assert').strict;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
-
-const addressVersion = require('./../../bolt11/address_version');
+import { throws, equal } from 'node:assert/strict';
+import test from 'node:test';
+import addressVersion from './../../bolt11/address_version.js';
 
 const tests = [
   {
@@ -42,9 +40,9 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
-    if (!!error) {
+for (const { args, description, error, expected } of tests) {
+  test(description, (t, end) => {
+    if (error) {
       throws(() => addressVersion(args), new Error(error), 'Got expected err');
     } else {
       equal(addressVersion(args).version, expected.version, 'Got version');
@@ -52,4 +50,4 @@ tests.forEach(({args, description, error, expected}) => {
 
     return end();
   });
-});
+}

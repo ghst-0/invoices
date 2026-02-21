@@ -1,7 +1,6 @@
-const BN = require('bn.js');
-
-const divisors = require('./conf/divisors');
-const parseHumanReadableValue = require('./parse_human_readable_value');
+import BN from 'bn.js';
+import divisors from './conf/divisors.json' with { type: 'json' };
+import parseHumanReadableValue from './parse_human_readable_value.js';
 
 const decBase = 10;
 const mtokenDivisibility = new BN(1e11, 10);
@@ -22,7 +21,7 @@ const valuePattern = /^\d+$/;
     mtokens: <Millitokens String>
   }
 */
-module.exports = ({amount, units}) => {
+export default ({amount, units}) => {
   // Exit early when there is no value
   if (!amount) {
     return {};

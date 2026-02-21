@@ -1,8 +1,6 @@
-const strictSame = require('node:assert').strict.deepStrictEqual;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
-
-const mtokensAsHrp = require('./../../bolt11/mtokens_as_hrp');
+import { deepStrictEqual } from 'node:assert/strict';
+import test from 'node:test';
+import mtokensAsHrp from './../../bolt11/mtokens_as_hrp.js';
 
 const tests = [
   {
@@ -52,12 +50,12 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, expected}) => {
-  return test(description, (t, end) => {
-    const {hrp} = mtokensAsHrp(args);
+for (const { args, description, expected } of tests) {
+  test(description, (t, end) => {
+    const { hrp } = mtokensAsHrp(args);
 
-    strictSame(hrp, expected, 'Hrp derived from mtokens');
+    deepStrictEqual(hrp, expected, 'Hrp derived from mtokens');
 
     return end();
-  });
-});
+  })
+}

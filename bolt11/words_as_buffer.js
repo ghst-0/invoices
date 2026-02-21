@@ -15,13 +15,13 @@ const trimByteLength = 1;
   @returns
   <Decoded Buffer Object>
 */
-module.exports = ({trim, words}) => {
+export default ({trim, words}) => {
   let bits = 0;
   let maxV = (1 << outBits) - 1;
   const result = [];
   let value = 0;
 
-  words.forEach((word, i) => {
+  for (const word of words) {
     value = (value << inBits) | word;
     bits += inBits;
 
@@ -30,15 +30,14 @@ module.exports = ({trim, words}) => {
 
       result.push((value >> bits) & maxV);
     }
-  });
+  }
 
-  if (!!bits) {
+  if (bits) {
     result.push((value << (outBits - bits)) & maxV);
   }
 
-  if (!!trim && !!(words.length * inBits % outBits)) {
+  if (trim && (words.length * inBits % outBits)) {
     return Buffer.from(result).slice([].length, -trimByteLength);
-  } else {
-    return Buffer.from(result);
   }
+  return Buffer.from(result);
 };

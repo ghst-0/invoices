@@ -18,18 +18,18 @@ const divisibilityPattern = /^[munp]$/;
     value: <Payment Request Value String>
   }
 */
-module.exports = ({amount, units}) => {
+export default ({amount, units}) => {
   const hrp = `${amount}${units}`;
 
   // Exit early when there is a divide marker
-  if (hrp.slice(-divisibilityMarkerLen).match(divisibilityPattern)) {
+  if (divisibilityPattern.test(hrp.slice(-divisibilityMarkerLen))) {
     return {
       divisor: hrp.slice(-divisibilityMarkerLen),
       value: hrp.slice(Number(), -divisibilityMarkerLen),
     };
   }
 
-  if (hrp.slice(-divisibilityMarkerLen).match(amountMultiplierPattern)) {
+  if (amountMultiplierPattern.test(hrp.slice(-divisibilityMarkerLen))) {
     throw new Error('InvalidAmountMultiplier');
   }
 

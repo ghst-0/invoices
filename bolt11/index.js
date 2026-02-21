@@ -1,10 +1,10 @@
-const byteDecodeRequest = require('./byte_decode_request');
-const byteEncodeRequest = require('./byte_encode_request');
-const createSignedRequest = require('./create_signed_request');
-const createUnsignedRequest = require('./create_unsigned_request');
-const parsePaymentRequest = require('./parse_payment_request');
+import byteDecodeRequest from './byte_decode_request.js';
+import byteEncodeRequest from './byte_encode_request.js';
+import createSignedRequest from './create_signed_request.js';
+import createUnsignedRequest from './create_unsigned_request.js';
+import parsePaymentRequest from './parse_payment_request.js';
 
-module.exports = {
+export {
   byteDecodeRequest,
   byteEncodeRequest,
   createSignedRequest,

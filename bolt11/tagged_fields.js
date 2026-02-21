@@ -1,4 +1,4 @@
-const wordsAsNumber = require('./words_as_number');
+import wordsAsNumber from './words_as_number.js';
 
 /** Derive tagged fields from words
 
@@ -14,13 +14,13 @@ const wordsAsNumber = require('./words_as_number');
     }]
   }
 */
-module.exports = ({words}) => {
+export default ({words}) => {
   const fields = [];
   let tagCode;
   let tagWords;
   let withTags = words.slice();
 
-  while (!!withTags.length) {
+  while (withTags.length > 0) {
     tagCode = withTags.shift();
 
     // Determine the tag's word length

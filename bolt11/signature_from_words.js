@@ -1,4 +1,4 @@
-const wordsAsBuffer = require('./words_as_buffer');
+import wordsAsBuffer from './words_as_buffer.js';
 
 const asBuffer = words => wordsAsBuffer({words, trim: true});
 const recoveryFlagByteLength = 1;
@@ -17,10 +17,10 @@ const sigLength = 64;
     signature: <Signature Buffer Object>
   }
 */
-module.exports = ({words}) => {
+export default ({words}) => {
   try {
     asBuffer(words);
-  } catch (err) {
+  } catch {
     throw new Error('ExpectedValidSignatureBuffer');
   }
 

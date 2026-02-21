@@ -1,5 +1,6 @@
-const {multipliers} = require('./conf/multipliers');
+import multipliers_json from './conf/multipliers.json' with { type: 'json' };
 
+const { multipliers } = multipliers_json;
 const isEmpty = n => !n || n === '0';
 const isNumeric = n => /^\d+$/.test(n);
 const asPico = amount => (amount * BigInt(10)).toString() + 'p';
@@ -19,7 +20,7 @@ const isString = n => typeof n === 'string';
     hrp: <Human Readable Part String>
   }
 */
-module.exports = ({mtokens}) => {
+export default ({mtokens}) => {
   // Exit early when there are no mtokens
   if (isEmpty(mtokens)) {
     return {hrp: String()};

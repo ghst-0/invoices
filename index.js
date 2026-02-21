@@ -1,13 +1,15 @@
-const {byteDecodeRequest} = require('./bolt11');
-const {byteEncodeRequest} = require('./bolt11');
-const {createSignedRequest} = require('./bolt11');
-const {createUnsignedRequest} = require('./bolt11');
-const {parsePaymentRequest} = require('./bolt11');
-
-module.exports = {
+import {
   byteDecodeRequest,
   byteEncodeRequest,
   createSignedRequest,
   createUnsignedRequest,
-  parsePaymentRequest,
+  parsePaymentRequest
+} from './bolt11/index.js';
+
+export {
+  byteDecodeRequest,
+  byteEncodeRequest,
+  createSignedRequest,
+  createUnsignedRequest,
+  parsePaymentRequest
 };

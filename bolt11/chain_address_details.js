@@ -1,10 +1,8 @@
-const {address} = require('bitcoinjs-lib');
-const {networks} = require('bitcoinjs-lib');
+import { address, networks } from 'bitcoinjs-lib';
+import addressVersion from './address_version.js';
 
-const addressVersion = require('./address_version');
-
-const base58 = n => { try { return address.fromBase58Check(n); } catch (e) {}};
-const bech32 = n => { try { return address.fromBech32(n); } catch (e) {}};
+const base58 = n => { try { return address.fromBase58Check(n); } catch {}};
+const bech32 = n => { try { return address.fromBech32(n); } catch {}};
 
 /** Derive chain address details
 
@@ -22,7 +20,7 @@ const bech32 = n => { try { return address.fromBech32(n); } catch (e) {}};
     version: <Witness or Address Version Number>
   }
 */
-module.exports = ({address, network}) => {
+export default ({address, network}) => {
   if (!address) {
     throw new Error('ExpectedAddressToDeriveChainAddressDetails');
   }

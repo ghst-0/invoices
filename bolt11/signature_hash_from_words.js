@@ -1,6 +1,5 @@
-const {createHash} = require('crypto');
-
-const wordsAsBuffer = require('./words_as_buffer');
+import { createHash } from 'node:crypto';
+import wordsAsBuffer from './words_as_buffer.js';
 
 const hashAlgorithm = 'sha256';
 const prefixEncoding = 'ascii';
@@ -17,7 +16,7 @@ const prefixEncoding = 'ascii';
     hash: <Payment Request Hash to Sign Buffer>
   }
 */
-module.exports = ({prefix, words}) => {
+export default ({prefix, words}) => {
   const rawPrefix = Buffer.from(prefix, prefixEncoding);
 
   const preimage = Buffer.concat([rawPrefix, wordsAsBuffer({words})]);

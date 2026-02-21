@@ -1,5 +1,5 @@
-const BN = require('bn.js');
-const {rawChanId} = require('bolt07');
+import BN from 'bn.js';
+import { rawChanId } from 'bolt07';
 
 const endian = 'be';
 
@@ -21,7 +21,7 @@ const endian = 'be';
     hex: <Raw Hop Encoding Hex String>
   }
 */
-module.exports = args => {
+export default args => {
   if (!args.base_fee_mtokens) {
     throw new Error('ExpectedBaseFeeMillitokensToConvertHopToHex');
   }

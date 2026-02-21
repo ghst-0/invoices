@@ -1,10 +1,7 @@
-const strictSame = require('node:assert').strict.deepStrictEqual;
-const test = require('node:test');
-const {throws} = require('node:assert').strict;
+import { throws, deepStrictEqual } from 'node:assert/strict';
+import test from 'node:test';
 
-const {byteDecodeRequest} = require('./../../');
-const {byteEncodeRequest} = require('./../../');
-const {parsePaymentRequest} = require('./../../');
+import { byteDecodeRequest, byteEncodeRequest, parsePaymentRequest } from './../../index.js';
 
 const tests = [
   {
@@ -67,9 +64,9 @@ const tests = [
   },
 ];
 
-tests.forEach(({args, description, error, expected}) => {
-  return test(description, (t, end) => {
-    if (!!error) {
+for (const { args, description, error, expected } of tests) {
+  test(description, (t, end) => {
+    if (error) {
       throws(() => byteEncodeRequest(args), new Error(error), 'Got error');
     } else {
       const details = byteEncodeRequest(args);
@@ -79,10 +76,10 @@ tests.forEach(({args, description, error, expected}) => {
       const original = parsePaymentRequest({request: args.request});
       const decoded = parsePaymentRequest({request})
 
-      strictSame(original, decoded, 'Original payment details preserved');
-      strictSame(details, expected, 'Got expected byte encoding');
+      deepStrictEqual(original, decoded, 'Original payment details preserved');
+      deepStrictEqual(details, expected, 'Got expected byte encoding');
     }
 
     return end();
   });
-});
+}
