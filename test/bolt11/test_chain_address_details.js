@@ -1,6 +1,7 @@
 import { throws, deepStrictEqual } from 'node:assert/strict';
 import test from 'node:test';
-import chainAddressDetails from './../../bolt11/chain_address_details.js';
+
+import { chainAddressDetails } from '../../bolt11/chain_address_details.js';
 
 const makeArgs = overrides => {
   const args = {

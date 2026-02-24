@@ -1,7 +1,9 @@
 import { throws, deepStrictEqual } from 'node:assert/strict';
 import test from 'node:test';
 
-import { byteDecodeRequest, byteEncodeRequest, parsePaymentRequest } from './../../index.js';
+import { byteDecodeRequest } from '../../bolt11/byte_decode_request.js';
+import { byteEncodeRequest } from '../../bolt11/byte_encode_request.js';
+import { parsePaymentRequest } from '../../bolt11/parse_payment_request.js';
 
 const tests = [
   {

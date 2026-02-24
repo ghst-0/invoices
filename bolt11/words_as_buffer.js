@@ -15,7 +15,7 @@ const trimByteLength = 1;
   @returns
   <Decoded Buffer Object>
 */
-export default ({trim, words}) => {
+const wordsAsBuffer = ({trim, words}) => {
   let bits = 0;
   let maxV = (1 << outBits) - 1;
   const result = [];
@@ -41,3 +41,5 @@ export default ({trim, words}) => {
   }
   return Buffer.from(result);
 };
+
+export { wordsAsBuffer }

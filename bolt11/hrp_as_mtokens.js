@@ -1,6 +1,6 @@
 import BN from 'bn.js';
 import divisors from './conf/divisors.json' with { type: 'json' };
-import parseHumanReadableValue from './parse_human_readable_value.js';
+import { parseHumanReadableValue } from './parse_human_readable_value.js';
 
 const decBase = 10;
 const mtokenDivisibility = new BN(1e11, 10);
@@ -21,7 +21,7 @@ const valuePattern = /^\d+$/;
     mtokens: <Millitokens String>
   }
 */
-export default ({amount, units}) => {
+const hrpAsMtokens = ({amount, units}) => {
   // Exit early when there is no value
   if (!amount) {
     return {};
@@ -47,3 +47,5 @@ export default ({amount, units}) => {
 
   return {mtokens: val.mul(mtokenDivisibility).div(div).toString()};
 };
+
+export { hrpAsMtokens }

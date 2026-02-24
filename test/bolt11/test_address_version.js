@@ -1,6 +1,7 @@
 import { throws, equal } from 'node:assert/strict';
 import test from 'node:test';
-import addressVersion from './../../bolt11/address_version.js';
+
+import { addressVersion } from '../../bolt11/address_version.js';
 
 const tests = [
   {

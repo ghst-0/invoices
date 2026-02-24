@@ -1,6 +1,7 @@
 import { address, networks } from 'bitcoinjs-lib';
+
+import { wordsAsBuffer } from './words_as_buffer.js';
 import addressVersions from './conf/address_versions.json' with { type: 'json' };
-import wordsAsBuffer from './words_as_buffer.js';
 
 const {toBase58Check} = address;
 const {toBech32} = address;
@@ -20,7 +21,7 @@ const {toBech32} = address;
     [chain_address]: <Chain Address String>
   }
 */
-export default ({network, words}) => {
+const wordsAsChainAddress = ({network, words}) => {
   if (!Array.isArray(words) || words.length === 0) {
     throw new Error('ExpectedWordsToConvertToChainAddress');
   }
@@ -54,4 +55,6 @@ export default ({network, words}) => {
     return {};
   }
 };
+
+export { wordsAsChainAddress }
 

@@ -7,6 +7,8 @@
   @returns
   <Big Endian Number>
 */
-export default ({words}) => {
+const wordsAsNumber = ({words}) => {
   return words.reverse().reduce((sum, n, i) => sum + n * 32 ** i, 0);
 };
+
+export { wordsAsNumber }

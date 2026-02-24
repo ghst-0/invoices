@@ -1,10 +1,10 @@
 import { featureFlagsFromWords } from 'bolt09';
 
+import { wordsAsBuffer } from './words_as_buffer.js';
+import { wordsAsChainAddress } from './words_as_chain_address.js';
+import { wordsAsHopHints } from './words_as_hop_hints.js';
+import { wordsAsNumber } from './words_as_number.js';
 import taggedFields from './conf/tagged_fields.json' with { type: 'json' };
-import wordsAsBuffer from './words_as_buffer.js';
-import wordsAsChainAddress from './words_as_chain_address.js';
-import wordsAsHopHints from './words_as_hop_hints.js';
-import wordsAsNumber from './words_as_number.js';
 
 const bufferAsHex = buffer => buffer.toString('hex');
 const descriptionHashByteLength = 32;
@@ -45,7 +45,7 @@ const trim = true;
     [payment]: <Payment Identifier Hex Encoded String>
   }
 */
-export default ({code, network, words}) => {
+const fieldAsDetails = ({code, network, words}) => {
   const field = taggedFields[code];
 
   // Exit early when field is unknown
@@ -135,3 +135,5 @@ export default ({code, network, words}) => {
     return {};
   }
 };
+
+export { fieldAsDetails }

@@ -1,5 +1,6 @@
-import chainAddressDetails from './chain_address_details.js';
-import hexAsWords from './hex_as_words.js';
+import { chainAddressDetails } from './chain_address_details.js';
+
+import { hexAsWords } from './hex_as_words.js';
 
 /** Convert chain address to bech32 words
 
@@ -13,7 +14,7 @@ import hexAsWords from './hex_as_words.js';
     words: [<Chain Address Word Number>]
   }
 */
-export default ({address, network}) => {
+const chainAddressAsWords = ({address, network}) => {
   if (!address) {
     throw new Error('ExpectedAddressToGetWordsForChainAddress');
   }
@@ -26,3 +27,5 @@ export default ({address, network}) => {
 
   return {words: [version].concat(hexAsWords({hex: hash}).words)};
 };
+
+export { chainAddressAsWords }

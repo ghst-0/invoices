@@ -1,6 +1,7 @@
 import { deepStrictEqual } from 'node:assert/strict';
 import test from 'node:test';
-import mtokensAsHrp from './../../bolt11/mtokens_as_hrp.js';
+
+import { mtokensAsHrp } from '../../bolt11/mtokens_as_hrp.js';
 
 const tests = [
   {

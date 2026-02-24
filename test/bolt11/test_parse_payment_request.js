@@ -1,6 +1,7 @@
 import { equal, deepStrictEqual } from 'node:assert/strict';
 import test from 'node:test';
-import { parsePaymentRequest } from './../../index.js';
+
+import { parsePaymentRequest } from '../../bolt11/parse_payment_request.js';
 
 const msPerSec = 1e3;
 

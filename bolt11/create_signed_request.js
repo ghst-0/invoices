@@ -2,8 +2,8 @@ import { createHash } from 'node:crypto';
 import { bech32 } from 'bech32';
 import { recover } from 'tiny-secp256k1';
 
-import hexAsWords from './hex_as_words.js';
-import wordsAsBuffer from './words_as_buffer.js';
+import { hexAsWords } from './hex_as_words.js';
+import { wordsAsBuffer } from './words_as_buffer.js';
 
 const {encode} = bech32;
 const {isArray} = Array;
@@ -28,7 +28,7 @@ const recoveryFlags = [0, 1, 2, 3];
     request: <BOLT 11 Encoded Payment Request String>
   }
 */
-export default ({destination, hrp, signature, tags}) => {
+const createSignedRequest = ({destination, hrp, signature, tags}) => {
   if (!destination) {
     throw new Error('ExpectedDestinationForSignedPaymentRequest');
   }
@@ -82,3 +82,5 @@ export default ({destination, hrp, signature, tags}) => {
 
   return {request: encode(hrp, words, MAX_SAFE_INTEGER)};
 };
+
+export { createSignedRequest }

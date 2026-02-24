@@ -1,6 +1,7 @@
 import { throws, deepStrictEqual } from 'node:assert/strict';
 import test from 'node:test';
-import fieldAsDetails from './../../bolt11/field_as_details.js';
+
+import { fieldAsDetails } from '../../bolt11/field_as_details.js';
 
 const tests = [
   {

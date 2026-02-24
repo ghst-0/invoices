@@ -1,6 +1,7 @@
 import { throws, deepStrictEqual } from 'node:assert/strict';
 import test from 'node:test';
-import { byteDecodeRequest } from './../../index.js';
+
+import { byteDecodeRequest } from '../../bolt11/byte_decode_request.js';
 
 const makeArgs = overrides => {
   const args = {

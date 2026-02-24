@@ -18,7 +18,7 @@ const divisibilityPattern = /^[munp]$/;
     value: <Payment Request Value String>
   }
 */
-export default ({amount, units}) => {
+const parseHumanReadableValue = ({amount, units}) => {
   const hrp = `${amount}${units}`;
 
   // Exit early when there is a divide marker
@@ -35,3 +35,5 @@ export default ({amount, units}) => {
 
   return {value: hrp};
 };
+
+export { parseHumanReadableValue }

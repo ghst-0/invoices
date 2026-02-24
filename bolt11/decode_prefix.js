@@ -19,7 +19,7 @@ const standardPrefixPattern = /^ln(\S+?)(\d*)([a-zA-Z]?)$/;
     units: <Amount Units String>
   }
 */
-export default ({prefix}) => {
+const decodePrefix = ({prefix}) => {
   const matches = prefix.match(standardPrefixPattern);
 
   if (!matches || matches.length === 0) {
@@ -40,3 +40,5 @@ export default ({prefix}) => {
 
   return {amount, network, units};
 };
+
+export { decodePrefix }

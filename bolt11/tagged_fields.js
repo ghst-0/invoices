@@ -1,4 +1,4 @@
-import wordsAsNumber from './words_as_number.js';
+import { wordsAsNumber } from './words_as_number.js';
 
 /** Derive tagged fields from words
 
@@ -14,7 +14,7 @@ import wordsAsNumber from './words_as_number.js';
     }]
   }
 */
-export default ({words}) => {
+const taggedFields = ({words}) => {
   const fields = [];
   let tagCode;
   let tagWords;
@@ -36,3 +36,5 @@ export default ({words}) => {
 
   return {fields};
 };
+
+export { taggedFields }

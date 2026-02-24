@@ -1,8 +1,11 @@
 import { equal, deepStrictEqual } from 'node:assert/strict';
 import { sign } from 'tiny-secp256k1';
 import test from 'node:test';
-import { createSignedRequest, createUnsignedRequest, parsePaymentRequest } from './../../index.js';
-import wordsAsBuffer from './../../bolt11/words_as_buffer.js';
+
+import { createSignedRequest } from '../../bolt11/create_signed_request.js';
+import { createUnsignedRequest } from '../../bolt11/create_unsigned_request.js';
+import { parsePaymentRequest } from '../../bolt11/parse_payment_request.js';
+import { wordsAsBuffer } from '../../bolt11/words_as_buffer.js';
 
 const bufFromHex = hex => Buffer.from(hex, 'hex');
 

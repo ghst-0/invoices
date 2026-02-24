@@ -1,15 +1,15 @@
 import { createHash } from 'node:crypto';
 import { featureFlagsAsWords } from 'bolt09';
 
-import chainAddressAsWords from './chain_address_as_words.js';
-import currencyCodes from './conf/bech32_currency_codes.json' with { type: 'json' };
-import descriptionAsWords from './description_as_words.js';
-import hexAsWords from './hex_as_words.js';
-import hopAsHex from './hop_as_hex.js';
-import mtokensAsHrp from './mtokens_as_hrp.js';
-import numberAsWords from './number_as_words.js';
+import { chainAddressAsWords } from './chain_address_as_words.js';
+import { descriptionAsWords } from './description_as_words.js';
+import { hexAsWords } from './hex_as_words.js';
+import { hopAsHex } from './hop_as_hex.js';
+import { mtokensAsHrp } from './mtokens_as_hrp.js';
+import { numberAsWords } from './number_as_words.js';
+import { wordsAsBuffer } from './words_as_buffer.js';
 import taggedFields from './conf/tagged_fields.json' with { type: 'json' };
-import wordsAsBuffer from './words_as_buffer.js';
+import currencyCodes from './conf/bech32_currency_codes.json' with { type: 'json' };
 
 const decBase = 10;
 const defaultExpireMs = 1e3 * 60 * 60 * 24;
@@ -57,7 +57,7 @@ const tokensAsMtokens = n => n ? (BigInt(n) * BigInt(1e3)).toString() : '0';
     tags: [<Data Tag Number>]
   }
 */
-export default args => {
+const createUnsignedRequest = args => {
   if (args.description === undefined && !args.description_hash) {
     throw new Error('ExpectedPaymentDescriptionOrDescriptionHashForPayReq');
   }
@@ -242,3 +242,5 @@ export default args => {
 
   return {hash, hrp, preimage: preimage.toString('hex'), tags: allTags};
 };
+
+export { createUnsignedRequest }

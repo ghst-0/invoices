@@ -1,4 +1,4 @@
-import wordsAsBuffer from './words_as_buffer.js';
+import { wordsAsBuffer } from './words_as_buffer.js';
 
 const asBuffer = words => wordsAsBuffer({words, trim: true});
 const recoveryFlagByteLength = 1;
@@ -17,7 +17,7 @@ const sigLength = 64;
     signature: <Signature Buffer Object>
   }
 */
-export default ({words}) => {
+const signatureFromWords = ({words}) => {
   try {
     asBuffer(words);
   } catch {
@@ -36,3 +36,5 @@ export default ({words}) => {
 
   return {recovery, signature};
 };
+
+export { signatureFromWords }

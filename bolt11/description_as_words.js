@@ -14,10 +14,12 @@ const {toWords} = bech32;
     [words]: [<Bech32 Word Number>]
   }
 */
-export default ({description}) => {
+const descriptionAsWords = ({description}) => {
   if (description === undefined) {
     return {};
   }
 
   return {words: toWords(Buffer.from(description || String(), encoding))};
 };
+
+export { descriptionAsWords }

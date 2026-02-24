@@ -20,7 +20,7 @@ const isString = n => typeof n === 'string';
     hrp: <Human Readable Part String>
   }
 */
-export default ({mtokens}) => {
+const mtokensAsHrp = ({mtokens}) => {
   // Exit early when there are no mtokens
   if (isEmpty(mtokens)) {
     return {hrp: String()};
@@ -50,3 +50,5 @@ export default ({mtokens}) => {
 
   return {hrp};
 };
+
+export { mtokensAsHrp }

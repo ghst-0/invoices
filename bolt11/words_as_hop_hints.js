@@ -1,5 +1,6 @@
 import { decodeChanId, encodeChanId } from 'bolt07';
-import wordsAsBuffer from './words_as_buffer.js';
+
+import { wordsAsBuffer } from './words_as_buffer.js';
 
 const decodeChanIdBuffer = buf => decodeChanId({id: buf.toString('hex')});
 
@@ -26,7 +27,7 @@ const decodeChanIdBuffer = buf => decodeChanId({id: buf.toString('hex')});
     }]
   }
 */
-export default ({words}) => {
+const wordsAsHopHints = ({words}) => {
   if (!Array.isArray(words)) {
     throw new Error('ExpectedWordsToInterpretAsHopHints');
   }
@@ -66,3 +67,5 @@ export default ({words}) => {
 
   return {hints};
 };
+
+export { wordsAsHopHints }

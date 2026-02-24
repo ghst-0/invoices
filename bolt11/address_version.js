@@ -1,4 +1,5 @@
 import { networks } from 'bitcoinjs-lib';
+
 import address_version from './conf/address_versions.json' with { type: 'json' };
 
 const { p2pkh, p2sh } = address_version;
@@ -20,7 +21,7 @@ const { p2pkh, p2sh } = address_version;
     version: <BOLT 11 Chain Address Version Number>
   }
 */
-export default ({network, prefix, version}) => {
+const addressVersion = ({network, prefix, version}) => {
   if (prefix) {
     return {version};
   }
@@ -48,3 +49,5 @@ export default ({network, prefix, version}) => {
     throw new Error('UnexpectedVersionToDeriveBoltOnChainAddressVersion');
   }
 };
+
+export { addressVersion }

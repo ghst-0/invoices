@@ -1,6 +1,7 @@
 import { throws, deepStrictEqual } from 'node:assert/strict';
 import test from 'node:test';
-import decodePrefix from './../../bolt11/decode_prefix.js';
+
+import { decodePrefix } from '../../bolt11/decode_prefix.js';
 
 const makeArgs = overrides => {
   const args = {prefix: 'lnbc1p'};

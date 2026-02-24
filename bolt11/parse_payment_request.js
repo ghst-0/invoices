@@ -1,14 +1,14 @@
 import { bech32 } from 'bech32';
 import { recover } from 'tiny-secp256k1';
 
-import decodePrefix from './decode_prefix.js';
-import fieldAsDetails from './field_as_details.js';
-import hrpAsMtokens from './hrp_as_mtokens.js';
-import requestDetails from './request_details.js';
-import signatureFromWords from './signature_from_words.js';
-import signatureHashFromWords from './signature_hash_from_words.js';
-import taggedFields from './tagged_fields.js';
-import wordsAsNumber from './words_as_number.js';
+import { decodePrefix } from './decode_prefix.js';
+import { fieldAsDetails } from './field_as_details.js';
+import { hrpAsMtokens } from './hrp_as_mtokens.js';
+import { requestDetails } from './request_details.js';
+import { signatureFromWords } from './signature_from_words.js';
+import { signatureHashFromWords } from './signature_hash_from_words.js';
+import { taggedFields } from './tagged_fields.js';
+import { wordsAsNumber } from './words_as_number.js';
 
 const asHex = arr => Buffer.from(arr).toString('hex');
 const {decode} = bech32;
@@ -60,7 +60,7 @@ const timestampWordLength = 7;
     tokens: <Requested Chain Tokens Number> (note: can differ from mtokens)
   }
 */
-export default ({request}) => {
+const parsePaymentRequest = ({request}) => {
   if (!request) {
     throw new Error('ExpectedPaymentRequest');
   }
@@ -102,3 +102,5 @@ export default ({request}) => {
 
   return details;
 };
+
+export { parsePaymentRequest }

@@ -14,10 +14,12 @@ const {toWords} = bech32;
     words: [<Bech32 Word Number>]
   }
 */
-export default ({hex}) => {
+const hexAsWords = ({hex}) => {
   if (!hex) {
     return {};
   }
 
   return {words: toWords(Buffer.from(hex, encoding))};
 };
+
+export { hexAsWords }

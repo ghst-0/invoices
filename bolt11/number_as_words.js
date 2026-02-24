@@ -12,7 +12,7 @@ const {floor} = Math;
     [words]: [<Bech32 Word Number>]
   }
 */
-export default ({number}) => {
+const numberAsWords = ({number}) => {
   if (number === undefined) {
     return {};
   }
@@ -33,3 +33,5 @@ export default ({number}) => {
 
   return {words};
 };
+
+export { numberAsWords }

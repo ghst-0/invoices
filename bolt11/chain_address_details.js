@@ -1,5 +1,6 @@
 import { address, networks } from 'bitcoinjs-lib';
-import addressVersion from './address_version.js';
+
+import { addressVersion } from './address_version.js';
 
 const base58 = n => { try { return address.fromBase58Check(n); } catch {}};
 const bech32 = n => { try { return address.fromBech32(n); } catch {}};
@@ -20,7 +21,7 @@ const bech32 = n => { try { return address.fromBech32(n); } catch {}};
     version: <Witness or Address Version Number>
   }
 */
-export default ({address, network}) => {
+const chainAddressDetails = ({address, network}) => {
   if (!address) {
     throw new Error('ExpectedAddressToDeriveChainAddressDetails');
   }
@@ -44,3 +45,5 @@ export default ({address, network}) => {
     version: addressVersion({network, prefix, version}).version,
   };
 };
+
+export { chainAddressDetails }

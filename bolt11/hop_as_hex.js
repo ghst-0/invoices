@@ -21,7 +21,7 @@ const endian = 'be';
     hex: <Raw Hop Encoding Hex String>
   }
 */
-export default args => {
+const hopAsHex = args => {
   if (!args.base_fee_mtokens) {
     throw new Error('ExpectedBaseFeeMillitokensToConvertHopToHex');
   }
@@ -52,3 +52,5 @@ export default args => {
 
   return {hex: encoded.toString('hex')};
 };
+
+export { hopAsHex }

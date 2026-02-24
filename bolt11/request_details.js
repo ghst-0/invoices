@@ -1,4 +1,4 @@
-import { safeTokens } from './../bolt00/index.js';
+import { safeTokens } from '../bolt00/safe_tokens.js';
 
 const asDateString = ms => new Date(ms).toISOString();
 const defaultCltvDelta = 18;
@@ -66,7 +66,7 @@ const msPerSec = 1e3;
     [tokens]: <Requested Chain Tokens Number> (note: can differ from mtokens)
   }
 */
-export default ({destination, details, mtokens, network, timestamp}) => {
+const requestDetails = ({destination, details, mtokens, network, timestamp}) => {
   const amounts = safeTokens({mtokens: mtokens || defaultMtokens});
 
   return details.reduce((sum, n) => {
@@ -139,3 +139,5 @@ export default ({destination, details, mtokens, network, timestamp}) => {
     tokens: mtokens ? amounts.tokens : Number(),
   });
 };
+
+export { requestDetails }
